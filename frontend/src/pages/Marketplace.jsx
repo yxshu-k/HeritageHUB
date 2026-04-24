@@ -9,7 +9,7 @@ export default function Marketplace() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [filters, setFilters] = useState({
-    search: searchParams.get('category') || '',
+    search: '',
     category: searchParams.get('category') || '',
     sortBy: '-createdAt',
     verified: false,

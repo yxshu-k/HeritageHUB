@@ -22,9 +22,6 @@ export default function ProductDetail() {
         let productData;
         if (id.startsWith('mock')) {
           // Handle mock data for demo
-          const allMock = [...MOCK_HERO_PRODUCTS]; // Need to import or define this
-          // Actually, I can just find it in the carousel's mock list or better, define a shared list
-          // For now, I'll just use a fallback if it's a mock ID
           toast.info('Viewing Demo Artifact');
           // I will define MOCK_DATA here for the demo
           const MOCK_DATA = {

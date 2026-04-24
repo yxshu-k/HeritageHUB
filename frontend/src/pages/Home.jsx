@@ -6,147 +6,102 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-dark-900">
-      {/* Hero Section */}
-      <section className="relative h-[80vh] flex items-center overflow-hidden">
-        <div className="absolute inset-0 z-0">
-          <div className="absolute inset-0 bg-gradient-to-b from-dark-950/20 via-dark-900/60 to-dark-900 z-10"></div>
-          <video 
-            autoPlay 
-            muted 
-            loop 
-            className="w-full h-full object-cover opacity-30"
-            poster="https://images.unsplash.com/photo-1554034483-04fda0d3507b?auto=format&fit=crop&q=80&w=2000"
-          >
-            {/* Fallback image if no video */}
-          </video>
-        </div>
-
-        <div className="container-app relative z-20 text-center">
-          <div className="inline-block px-4 py-1 border border-heritage-600/30 rounded-full bg-heritage-600/5 mb-6 animate-fade-in">
-            <span className="text-[10px] uppercase tracking-[0.3em] text-heritage-600 font-black">
-              Premium Antique Marketplace
-            </span>
-          </div>
-          
-          <h1 className="text-6xl md:text-8xl font-black text-white mb-8 leading-tight tracking-tighter">
-            BUY <span className="text-heritage-600">HISTORY.</span><br />
-            SELL <span className="text-heritage-600">LEGACY.</span>
-          </h1>
-          
-          <p className="text-xl md:text-2xl text-slate-400 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
-            The world's most trusted platform for authentic heritage collectibles and rare antiquities.
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
-            <button
-              onClick={() => navigate('/marketplace')}
-              className="btn-primary px-12 py-5 text-lg shadow-2xl shadow-heritage-600/20"
-            >
-              Enter Marketplace
-            </button>
-            <button
-              onClick={() => navigate('/add-product')}
-              className="group text-white font-bold flex items-center gap-2 hover:text-heritage-600 transition-colors"
-            >
-              List Your Artifact 
-              <span className="group-hover:translate-x-1 transition-transform">→</span>
-            </button>
-          </div>
-        </div>
-
-        {/* Floating Accents */}
-        <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-heritage-600/10 rounded-full blur-[120px]"></div>
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-heritage-600/5 rounded-full blur-[150px]"></div>
-      </section>
+      {/* Primary Hero Carousel */}
+      <HeroCarousel />
 
       {/* Categories Preview */}
-      <section className="py-20 px-4 bg-dark-800">
+      <section className="py-24 px-4 bg-dark-900 relative">
         <div className="container-app">
           <div className="text-center mb-16">
-            <h2 className="section-title">Browse by Category</h2>
-            <p className="section-subtitle">Discover treasures across multiple categories</p>
+            <div className="inline-block px-3 py-1 bg-heritage-600/10 border border-heritage-600/30 rounded-full mb-4">
+              <span className="text-[10px] uppercase tracking-[0.3em] text-heritage-600 font-black">Curated Archives</span>
+            </div>
+            <h2 className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tighter">
+              BROWSE BY <span className="text-heritage-600">CATEGORY</span>
+            </h2>
+            <p className="text-slate-400 font-light max-w-xl mx-auto italic">Explore rare antiquities categorized by their historical era and cultural significance.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
             {[
-              { name: 'Ancient Coins', icon: '🪙', color: 'from-blue-600 to-blue-900' },
-              { name: 'Vintage Watches', icon: '⏰', color: 'from-purple-600 to-purple-900' },
-              { name: 'Rare Books', icon: '📚', color: 'from-orange-600 to-orange-900' },
-              { name: 'Jewelry', icon: '💎', color: 'from-pink-600 to-pink-900' },
-              { name: 'Paintings', icon: '🎨', color: 'from-red-600 to-red-900' },
-              { name: 'Sculptures', icon: '🗿', color: 'from-cyan-600 to-cyan-900' },
-              { name: 'Cameras', icon: '📷', color: 'from-green-600 to-green-900' },
-              { name: 'Artifacts', icon: '🏺', color: 'from-amber-600 to-amber-900' },
+              { name: 'Ancient Coins', icon: '🪙', color: 'from-blue-600 to-blue-950', delay: '0' },
+              { name: 'Vintage Watches', icon: '⏰', color: 'from-amber-600 to-amber-950', delay: '100' },
+              { name: 'Rare Books', icon: '📚', color: 'from-emerald-600 to-emerald-950', delay: '200' },
+              { name: 'Antique Jewelry', icon: '💎', color: 'from-purple-600 to-purple-950', delay: '300' },
+              { name: 'Paintings', icon: '🎨', color: 'from-rose-600 to-rose-950', delay: '400' },
+              { name: 'Sculptures', icon: '🗿', color: 'from-cyan-600 to-cyan-950', delay: '500' },
+              { name: 'Historical Cameras', icon: '📷', color: 'from-slate-600 to-slate-950', delay: '600' },
+              { name: 'Traditional Artifacts', icon: '🏺', color: 'from-orange-600 to-orange-950', delay: '700' },
             ].map((category, idx) => (
               <div
                 key={idx}
-                onClick={() => navigate(`/marketplace?category=${category.name}`)}
-                className="card p-6 text-center cursor-pointer group"
+                onClick={() => navigate(`/marketplace?category=${encodeURIComponent(category.name)}`)}
+                className="group relative h-64 overflow-hidden rounded-2xl cursor-pointer transition-all duration-500 hover:-translate-y-2"
               >
-                <div className={`bg-gradient-to-br ${category.color} w-20 h-20 rounded-full flex items-center justify-center text-4xl mx-auto mb-4 group-hover:scale-110 transition-transform`}>
-                  {category.icon}
+                <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-40 group-hover:opacity-60 transition-opacity`}></div>
+                <div className="absolute inset-0 bg-dark-950/40 backdrop-blur-[2px] group-hover:backdrop-blur-0 transition-all"></div>
+                
+                <div className="relative h-full p-8 flex flex-col items-center justify-center text-center">
+                  <div className="text-5xl mb-4 transform group-hover:scale-125 transition-transform duration-500">
+                    {category.icon}
+                  </div>
+                  <h3 className="text-xl font-bold text-white mb-2 tracking-tight">
+                    {category.name}
+                  </h3>
+                  <div className="w-8 h-1 bg-heritage-600 rounded-full scale-0 group-hover:scale-100 transition-transform duration-300"></div>
+                  
+                  <button className="mt-6 text-[10px] font-black uppercase tracking-[0.3em] text-heritage-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                    View Archive →
+                  </button>
                 </div>
-                <h3 className="text-lg font-semibold text-heritage-600 group-hover:text-heritage-500 transition-colors">
-                  {category.name}
-                </h3>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Hero Carousel */}
-      <HeroCarousel />
-
       {/* Why Choose Us */}
-      <section className="py-20 px-4">
+      <section className="py-24 px-4 border-y border-dark-800">
         <div className="container-app">
           <div className="text-center mb-16">
-            <h2 className="section-title">Why Choose HeritageHUB?</h2>
-            <p className="section-subtitle">The premier platform for heritage enthusiasts</p>
+            <h2 className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tighter">
+              WHY <span className="text-heritage-600">HERITAGEHUB?</span>
+            </h2>
+            <p className="text-slate-400 font-light italic">The global gold standard for antiquity trade and preservation.</p>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
             {[
               {
                 title: 'Verified Authenticity',
-                description: 'Every item is carefully verified and authenticated by our expert team.',
-                icon: '✓'
+                description: 'Every artifact undergoes rigorous multi-stage verification by certified heritage experts.',
+                icon: '📜',
+                accent: 'bg-blue-500/10'
               },
               {
-                title: 'Secure Auctions',
-                description: 'Bid with confidence in our transparent and secure bidding system.',
-                icon: '🔒'
+                title: 'Secure Custody',
+                description: 'State-of-the-art blockchain tracing ensures the provenance and security of your collection.',
+                icon: '🔐',
+                accent: 'bg-amber-500/10'
               },
               {
-                title: 'Heritage Stories',
-                description: 'Learn the rich history and cultural significance of each artifact.',
-                icon: '📖'
-              },
-              {
-                title: 'Global Community',
-                description: 'Connect with collectors and historians from around the world.',
-                icon: '🌍'
-              },
-              {
-                title: 'Fair Pricing',
-                description: 'Market-driven prices that reflect true collector value.',
-                icon: '💰'
-              },
-              {
-                title: 'Expert Support',
-                description: 'Get personalized assistance from our heritage specialists.',
-                icon: '👥'
-              },
+                title: 'Global Outreach',
+                description: 'Connect with elite collectors and institutions from over 120 countries worldwide.',
+                icon: '🌍',
+                accent: 'bg-emerald-500/10'
+              }
             ].map((feature, idx) => (
-              <div key={idx} className="card p-8 text-center">
-                <div className="text-5xl mb-4">{feature.icon}</div>
-                <h3 className="text-xl font-semibold text-heritage-600 mb-3">
-                  {feature.title}
-                </h3>
-                <p className="text-slate-400">
-                  {feature.description}
-                </p>
+              <div key={idx} className="relative group">
+                <div className={`absolute -inset-2 ${feature.accent} rounded-3xl blur-xl opacity-0 group-hover:opacity-100 transition-opacity`}></div>
+                <div className="relative card p-10 h-full border-t-4 border-heritage-600">
+                  <div className="text-4xl mb-6">{feature.icon}</div>
+                  <h3 className="text-2xl font-bold text-white mb-4 tracking-tight">
+                    {feature.title}
+                  </h3>
+                  <p className="text-slate-400 leading-relaxed font-light">
+                    {feature.description}
+                  </p>
+                </div>
               </div>
             ))}
           </div>
@@ -154,20 +109,31 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-20 px-4 bg-gradient-luxury">
-        <div className="container-app text-center">
-          <h2 className="text-4xl font-cinzel font-bold text-heritage-600 mb-6">
-            Ready to Begin Your Collection?
+      <section className="py-32 px-4 relative overflow-hidden">
+        <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1459706484596-7140c49739c4?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center opacity-10 grayscale"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/90 to-dark-900"></div>
+        
+        <div className="container-app relative z-10 text-center">
+          <h2 className="text-5xl md:text-7xl font-black text-white mb-8 tracking-tighter">
+            READY TO <span className="text-heritage-600">OWN HISTORY?</span>
           </h2>
-          <p className="text-slate-300 mb-8 max-w-2xl mx-auto">
-            Join thousands of collectors preserving history one artifact at a time.
+          <p className="text-xl text-slate-400 mb-12 max-w-2xl mx-auto font-light italic">
+            Join our exclusive community of curators and begin your journey into the past today.
           </p>
-          <button
-            onClick={() => navigate('/register')}
-            className="btn-primary text-lg px-8 py-4"
-          >
-            Start Trading Now
-          </button>
+          <div className="flex flex-col sm:flex-row gap-6 justify-center">
+            <button
+              onClick={() => navigate('/register')}
+              className="btn-primary px-12 py-5 text-lg"
+            >
+              Start Your Collection
+            </button>
+            <button
+              onClick={() => navigate('/marketplace')}
+              className="px-12 py-5 border border-dark-700 text-white rounded-xl font-bold hover:bg-dark-800 transition-colors"
+            >
+              Explore All Items
+            </button>
+          </div>
         </div>
       </section>
     </div>

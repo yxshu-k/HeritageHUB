@@ -115,7 +115,7 @@ export default function HeroCarousel() {
           }
         }}
         autoplay={{ delay: 7000, disableOnInteraction: false }}
-        className="h-[600px] w-full"
+        className="h-[85vh] w-full"
       >
         {products.map((product) => (
           <SwiperSlide key={product._id}>
@@ -126,6 +126,10 @@ export default function HeroCarousel() {
                   src={product.images?.[0]}
                   alt={product.title}
                   className="w-full h-full object-cover opacity-40 scale-105"
+                  onError={(e) => {
+                    e.target.onerror = null;
+                    e.target.src = 'https://images.unsplash.com/photo-1554034483-04fda0d3507b?auto=format&fit=crop&q=80&w=2000';
+                  }}
                 />
                 <div className="absolute inset-0 bg-gradient-to-r from-dark-950 via-dark-950/80 to-transparent"></div>
               </div>
@@ -191,6 +195,10 @@ export default function HeroCarousel() {
                       src={product.images?.[0]}
                       alt={product.title}
                       className="w-full h-[400px] object-cover rounded-xl shadow-2xl"
+                      onError={(e) => {
+                        e.target.onerror = null;
+                        e.target.src = 'https://images.unsplash.com/photo-1554034483-04fda0d3507b?auto=format&fit=crop&q=80&w=2000';
+                      }}
                     />
                     <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-heritage-600/10 rounded-full blur-3xl"></div>
                   </div>

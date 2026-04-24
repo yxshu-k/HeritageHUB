@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { productAPI } from '../services/api';
 import { useAuth } from '../context/AuthContext';
 import toast from 'react-hot-toast';
@@ -8,7 +8,7 @@ export default function AdminDashboard() {
   const [products, setProducts] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  const fetchProducts = async () => {
+  const fetchProducts = useCallback(async () => {
     setLoading(true);
     try {
       const response = await productAPI.getAllProducts({});
@@ -19,13 +19,14 @@ export default function AdminDashboard() {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
 
   useEffect(() => {
     if (user?.role === 'admin') {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
       fetchProducts();
     }
-  }, [user]);
+  }, [user, fetchProducts]);
 
   const handleVerify = async (productId) => {
     try {
