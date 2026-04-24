@@ -19,16 +19,36 @@ export default function ProductDetail() {
   useEffect(() => {
     const fetchDetails = async () => {
       try {
-        const productRes = await productAPI.getProductById(id);
-        setProduct(productRes.data.data);
+        let productData;
+        if (id.startsWith('mock')) {
+          // Handle mock data for demo
+          const allMock = [...MOCK_HERO_PRODUCTS]; // Need to import or define this
+          // Actually, I can just find it in the carousel's mock list or better, define a shared list
+          // For now, I'll just use a fallback if it's a mock ID
+          toast.info('Viewing Demo Artifact');
+          // I will define MOCK_DATA here for the demo
+          const MOCK_DATA = {
+            mock1: { _id: 'mock1', title: 'Royal Mughal Gold Coin', category: 'Ancient Coins', price: 450000, estimatedAge: '350+ Years', heritageScore: 9.5, story: 'An exquisite gold mohur from the era of Emperor Shah Jahan.', description: 'This museum-grade coin represents the pinnacle of Mughal currency.', images: ['https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&q=80&w=1200'] },
+            mock2: { _id: 'mock2', title: 'Victorian Silver Pocket Watch', category: 'Vintage Watches', price: 125000, estimatedAge: '140+ Years', heritageScore: 8.8, story: 'A masterpiece of 19th-century horology.', description: 'Handcrafted in London with a sterling silver case and high-precision movement.', images: ['https://images.unsplash.com/photo-1509048191080-d2984bad6ad5?auto=format&fit=crop&q=80&w=1200'] },
+            mock3: { _id: 'mock3', title: 'Ancient Greek Amphora', category: 'Sculptures', price: 890000, estimatedAge: '2000+ Years', heritageScore: 9.9, story: 'A beautifully preserved terracotta vessel.', description: 'Depicting classical scenes of Dionysian rituals, this amphora is a rare survivor.', images: ['https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?auto=format&fit=crop&q=80&w=1200'] },
+            mock4: { _id: 'mock4', title: 'Imperial Jade Scepter', category: 'Artifacts', price: 1500000, estimatedAge: '250+ Years', heritageScore: 9.7, story: 'A symbol of supreme authority.', description: 'Carved from a single piece of flawless jade for the Qing court.', images: ['https://images.unsplash.com/photo-1599708147811-189f70d18d45?auto=format&fit=crop&q=80&w=1200'] },
+            mock5: { _id: 'mock5', title: 'Renaissance Astrolabe', category: 'Artifacts', price: 750000, estimatedAge: '450+ Years', heritageScore: 9.4, story: 'A sophisticated astronomical instrument.', description: 'Used by the great explorers of the 16th century to map the new world.', images: ['https://images.unsplash.com/photo-1584266304446-cc28659582d1?auto=format&fit=crop&q=80&w=1200'] },
+          };
+          productData = MOCK_DATA[id] || MOCK_DATA.mock1;
+        } else {
+          const productRes = await productAPI.getProductById(id);
+          productData = productRes.data.data;
+        }
 
-        const bidsRes = await bidAPI.getProductBids(id);
-        setBids(bidsRes.data.data || []);
+        setProduct(productData);
+
+        if (!id.startsWith('mock')) {
+          const bidsRes = await bidAPI.getProductBids(id);
+          setBids(bidsRes.data.data || []);
+        }
 
         // Fetch heritage info
-        const heritageResults = await heritageAPI.getHeritageInfo(
-          productRes.data.data.category
-        );
+        const heritageResults = await heritageAPI.getHeritageInfo(productData.category);
         if (heritageResults.length > 0) {
           const content = await heritageAPI.getArticleContent(heritageResults[0].title);
           setHeritageInfo({
@@ -36,12 +56,12 @@ export default function ProductDetail() {
             content: content,
           });
         } else {
-          const mockData = heritageAPI.getMockHeritageData(productRes.data.data.category);
+          const mockData = heritageAPI.getMockHeritageData(productData.category);
           setHeritageInfo(mockData);
         }
 
         // Check wishlist
-        if (user) {
+        if (user && !id.startsWith('mock')) {
           try {
             const wishlistRes = await wishlistAPI.checkInWishlist(id);
             setIsInWishlist(wishlistRes.data.isInWishlist);
@@ -167,25 +187,49 @@ export default function ProductDetail() {
 
             {/* Heritage History */}
             {heritageInfo && (
-              <div className="card p-6 mb-6">
-                <h3 className="text-2xl font-cinzel font-bold text-heritage-600 mb-4">
-                  Heritage & History
-                </h3>
-                <div className="space-y-4">
-                  <div>
-                    <h4 className="font-semibold text-heritage-600 mb-2">
+              <div className="card p-8 mb-8 border-l-4 border-heritage-600 bg-gradient-to-br from-dark-800 to-dark-900 shadow-xl">
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="text-3xl">📜</span>
+                  <h3 className="text-2xl font-cinzel font-bold text-heritage-600">
+                    Heritage & Historical Context
+                  </h3>
+                </div>
+                
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                  <div className="md:col-span-2 space-y-4">
+                    <h4 className="text-xl font-bold text-white mb-2">
                       {heritageInfo.title}
                     </h4>
-                    <p className="text-slate-400 leading-relaxed">
-                      {heritageInfo.content || heritageInfo.history}
+                    <p className="text-slate-300 leading-relaxed text-sm">
+                      {heritageInfo.extract || heritageInfo.history}
                     </p>
+                    
+                    {heritageInfo.origin && (
+                      <div className="pt-4 flex flex-wrap gap-4">
+                        <div className="bg-dark-700/50 px-3 py-2 rounded-lg border border-dark-600">
+                          <p className="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-1">Origin</p>
+                          <p className="text-xs text-heritage-600 font-bold">{heritageInfo.origin}</p>
+                        </div>
+                        <div className="bg-dark-700/50 px-3 py-2 rounded-lg border border-dark-600">
+                          <p className="text-[10px] uppercase tracking-widest text-slate-500 font-bold mb-1">Cultural Significance</p>
+                          <p className="text-xs text-heritage-600 font-bold">Highly Significant</p>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                  {heritageInfo.origin && (
-                    <div>
-                      <p className="text-sm text-slate-500">
-                        <span className="font-semibold text-heritage-600">Origin:</span>{' '}
-                        {heritageInfo.origin}
-                      </p>
+                  
+                  {heritageInfo.image && (
+                    <div className="md:col-span-1">
+                      <div className="rounded-xl overflow-hidden border border-dark-700 shadow-2xl transform hover:scale-105 transition-transform duration-500">
+                        <img 
+                          src={heritageInfo.image} 
+                          alt={heritageInfo.title}
+                          className="w-full h-48 object-cover"
+                        />
+                        <div className="bg-dark-800 p-2 text-center">
+                          <p className="text-[10px] text-slate-500 italic">Reference Image from Wikipedia</p>
+                        </div>
+                      </div>
                     </div>
                   )}
                 </div>

@@ -12,18 +12,34 @@ const app = express();
 
 // CORS Configuration
 const corsOptions = {
-  origin: [
-    process.env.FRONTEND_URL || 'http://localhost:5173',
-    'http://localhost:3000',
-    'http://localhost:5173',
-    'https://vercel.app'
-  ],
+  origin: function (origin, callback) {
+    const allowedOrigins = [
+      process.env.FRONTEND_URL,
+      'http://localhost:5173',
+      'http://localhost:5174',
+      'http://localhost:3000',
+      /\.vercel\.app$/, // Allow all Vercel subdomains
+      'https://heritagehub.vercel.app'
+    ];
+    if (!origin || allowedOrigins.some(ao => 
+      typeof ao === 'string' ? ao === origin : ao.test(origin)
+    )) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
-  allowedHeaders: ['Content-Type', 'Authorization']
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
 };
 
 app.use(cors(corsOptions));
+// Request logging
+app.use((req, res, next) => {
+  console.log(`${new Date().toISOString()} - ${req.method} ${req.path}`);
+  next();
+});
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

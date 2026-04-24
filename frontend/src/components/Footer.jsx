@@ -7,11 +7,14 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div>
-            <h3 className="text-2xl font-cinzel font-bold text-heritage-600 mb-4">
-              🏺 HeritageHUB
+            <h3 className="text-3xl font-cinzel font-black text-white mb-6 tracking-tighter">
+              HERITAGE<span className="text-heritage-600">HUB</span>
             </h3>
-            <p className="text-slate-400">
-              The premium marketplace for antiques, vintage collectibles, and rare heritage artifacts.
+            <p className="text-slate-400 font-light italic mb-6">
+              "Buy History. Sell Legacy. Preserve Heritage."
+            </p>
+            <p className="text-sm text-slate-500 leading-relaxed">
+              The world's premier platform for authentic heritage collectibles and rare antiquities. Our mission is to bridge the past and future by preserving the stories behind every artifact.
             </p>
           </div>
 

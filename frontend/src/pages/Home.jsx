@@ -7,37 +7,56 @@ export default function Home() {
   return (
     <div className="min-h-screen bg-dark-900">
       {/* Hero Section */}
-      <section className="bg-gradient-luxury py-24 px-4 relative overflow-hidden">
-        <div className="container-app text-center relative z-10">
-          <h1 className="text-5xl md:text-7xl font-cinzel font-bold text-heritage-600 mb-6 leading-tight">
-            Own a Piece of <span className="text-white">History</span>
+      <section className="relative h-[80vh] flex items-center overflow-hidden">
+        <div className="absolute inset-0 z-0">
+          <div className="absolute inset-0 bg-gradient-to-b from-dark-950/20 via-dark-900/60 to-dark-900 z-10"></div>
+          <video 
+            autoPlay 
+            muted 
+            loop 
+            className="w-full h-full object-cover opacity-30"
+            poster="https://images.unsplash.com/photo-1554034483-04fda0d3507b?auto=format&fit=crop&q=80&w=2000"
+          >
+            {/* Fallback image if no video */}
+          </video>
+        </div>
+
+        <div className="container-app relative z-20 text-center">
+          <div className="inline-block px-4 py-1 border border-heritage-600/30 rounded-full bg-heritage-600/5 mb-6 animate-fade-in">
+            <span className="text-[10px] uppercase tracking-[0.3em] text-heritage-600 font-black">
+              Premium Antique Marketplace
+            </span>
+          </div>
+          
+          <h1 className="text-6xl md:text-8xl font-black text-white mb-8 leading-tight tracking-tighter">
+            BUY <span className="text-heritage-600">HISTORY.</span><br />
+            SELL <span className="text-heritage-600">LEGACY.</span>
           </h1>
-          <p className="text-xl md:text-2xl text-slate-300 mb-4 max-w-3xl mx-auto">
-            Buy History. Sell Legacy. Preserve Heritage.
-          </p>
-          <p className="text-slate-400 mb-12 max-w-2xl mx-auto">
-            HeritageHUB is the premium marketplace for antiques, vintage collectibles, and rare heritage artifacts. Connect with collectors worldwide.
+          
+          <p className="text-xl md:text-2xl text-slate-400 mb-12 max-w-2xl mx-auto font-light leading-relaxed">
+            The world's most trusted platform for authentic heritage collectibles and rare antiquities.
           </p>
 
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          <div className="flex flex-col sm:flex-row gap-6 justify-center items-center">
             <button
               onClick={() => navigate('/marketplace')}
-              className="btn-primary text-lg px-8 py-4"
+              className="btn-primary px-12 py-5 text-lg shadow-2xl shadow-heritage-600/20"
             >
-              Explore Marketplace
+              Enter Marketplace
             </button>
             <button
               onClick={() => navigate('/add-product')}
-              className="btn-secondary text-lg px-8 py-4"
+              className="group text-white font-bold flex items-center gap-2 hover:text-heritage-600 transition-colors"
             >
-              List Your Items
+              List Your Artifact 
+              <span className="group-hover:translate-x-1 transition-transform">→</span>
             </button>
           </div>
         </div>
 
-        {/* Decorative Elements */}
-        <div className="absolute top-0 right-0 w-96 h-96 bg-heritage-600 opacity-5 rounded-full blur-3xl"></div>
-        <div className="absolute bottom-0 left-0 w-96 h-96 bg-heritage-600 opacity-5 rounded-full blur-3xl"></div>
+        {/* Floating Accents */}
+        <div className="absolute -bottom-24 -left-24 w-96 h-96 bg-heritage-600/10 rounded-full blur-[120px]"></div>
+        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-heritage-600/5 rounded-full blur-[150px]"></div>
       </section>
 
       {/* Categories Preview */}

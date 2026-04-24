@@ -1,11 +1,65 @@
 import { useEffect, useState } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
-import { Navigation, Pagination, Autoplay } from 'swiper/modules';
+import { Navigation, Pagination, Autoplay, EffectFade } from 'swiper/modules';
 import { useNavigate } from 'react-router-dom';
 import { productAPI } from '../services/api';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
+import 'swiper/css/effect-fade';
+
+const MOCK_HERO_PRODUCTS = [
+  {
+    _id: 'mock1',
+    title: 'Royal Mughal Gold Coin',
+    story: 'An exquisite gold mohur from the era of Emperor Shah Jahan, featuring intricate calligraphy and unparalleled purity.',
+    images: ['https://images.unsplash.com/photo-1610375461246-83df859d849d?auto=format&fit=crop&q=80&w=1200'],
+    estimatedAge: '350+ Years',
+    heritageScore: 9.5,
+    price: 450000,
+    verificationStatus: 'verified'
+  },
+  {
+    _id: 'mock2',
+    title: 'Victorian Silver Pocket Watch',
+    story: 'A masterpiece of 19th-century horology, this precision timepiece was handcrafted in London and remains in perfect working condition.',
+    images: ['https://images.unsplash.com/photo-1509048191080-d2984bad6ad5?auto=format&fit=crop&q=80&w=1200'],
+    estimatedAge: '140+ Years',
+    heritageScore: 8.8,
+    price: 125000,
+    verificationStatus: 'verified'
+  },
+  {
+    _id: 'mock3',
+    title: 'Ancient Greek Amphora',
+    story: 'A beautifully preserved terracotta vessel from the Attic period, depicting scenes of classical mythology and everyday life.',
+    images: ['https://images.unsplash.com/photo-1605721911519-3dfeb3be25e7?auto=format&fit=crop&q=80&w=1200'],
+    estimatedAge: '2000+ Years',
+    heritageScore: 9.9,
+    price: 890000,
+    verificationStatus: 'verified'
+  },
+  {
+    _id: 'mock4',
+    title: 'Imperial Jade Scepter',
+    story: 'A symbol of supreme authority from the Qing Dynasty, carved from a single piece of flawless Hetian jade.',
+    images: ['https://images.unsplash.com/photo-1599708147811-189f70d18d45?auto=format&fit=crop&q=80&w=1200'],
+    estimatedAge: '250+ Years',
+    heritageScore: 9.7,
+    price: 1500000,
+    verificationStatus: 'verified'
+  },
+  {
+    _id: 'mock5',
+    title: 'Renaissance Astrolabe',
+    story: 'A sophisticated astronomical instrument from 16th-century Florence, used by navigators to determine their latitude by the stars.',
+    images: ['https://images.unsplash.com/photo-1584266304446-cc28659582d1?auto=format&fit=crop&q=80&w=1200'],
+    estimatedAge: '450+ Years',
+    heritageScore: 9.4,
+    price: 750000,
+    verificationStatus: 'verified'
+  }
+];
 
 export default function HeroCarousel() {
   const navigate = useNavigate();
@@ -19,9 +73,11 @@ export default function HeroCarousel() {
           verified: 'true',
           limit: 10,
         });
-        setProducts(response.data.data || []);
+        const fetchedProducts = response.data.data || [];
+        setProducts(fetchedProducts.length > 0 ? fetchedProducts : MOCK_HERO_PRODUCTS);
       } catch (error) {
         console.error('Failed to fetch products:', error);
+        setProducts(MOCK_HERO_PRODUCTS);
       } finally {
         setLoading(false);
       }
@@ -32,131 +88,150 @@ export default function HeroCarousel() {
 
   if (loading) {
     return (
-      <div className="h-96 bg-gradient-luxury flex items-center justify-center">
+      <div className="h-[600px] bg-dark-900 flex items-center justify-center">
         <div className="text-center">
-          <div className="w-12 h-12 border-4 border-heritage-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-          <p className="text-heritage-600 font-semibold">Loading Heritage Collections...</p>
+          <div className="w-16 h-16 border-4 border-heritage-600 border-t-transparent rounded-full animate-spin mx-auto mb-6"></div>
+          <p className="text-heritage-600 font-cinzel text-xl animate-pulse">Unveiling History...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className="w-full bg-gradient-luxury py-12">
-      <div className="container-app">
-        <div className="mb-12 text-center">
-          <h2 className="section-title">Featured Heritage Collections</h2>
-          <p className="section-subtitle">Explore our most coveted antiques and collectibles</p>
-        </div>
+    <div className="relative w-full bg-dark-950 overflow-hidden border-y border-dark-800">
+      <Swiper
+        modules={[Navigation, Pagination, Autoplay, EffectFade]}
+        effect="fade"
+        spaceBetween={0}
+        slidesPerView={1}
+        navigation={{
+          nextEl: '.swiper-button-next-custom',
+          prevEl: '.swiper-button-prev-custom',
+        }}
+        pagination={{ 
+          clickable: true, 
+          renderBullet: (index, className) => {
+            return `<span class="${className} custom-bullet"></span>`;
+          }
+        }}
+        autoplay={{ delay: 7000, disableOnInteraction: false }}
+        className="h-[600px] w-full"
+      >
+        {products.map((product) => (
+          <SwiperSlide key={product._id}>
+            <div className="relative w-full h-full flex items-center">
+              {/* Background Image with Overlay */}
+              <div className="absolute inset-0">
+                <img
+                  src={product.images?.[0]}
+                  alt={product.title}
+                  className="w-full h-full object-cover opacity-40 scale-105"
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-dark-950 via-dark-950/80 to-transparent"></div>
+              </div>
 
-        {products.length === 0 ? (
-          <div className="text-center py-20">
-            <p className="text-xl text-slate-400">No verified products yet. Check back soon!</p>
-          </div>
-        ) : (
-          <Swiper
-            modules={[Navigation, Pagination, Autoplay]}
-            spaceBetween={24}
-            slidesPerView={1}
-            navigation
-            pagination={{ clickable: true, dynamicBullets: true }}
-            autoplay={{ delay: 5000, disableOnInteraction: false }}
-            breakpoints={{
-              640: { slidesPerView: 2 },
-              1024: { slidesPerView: 3 },
-            }}
-            className="heroCarousel"
-          >
-            {products.map((product) => (
-              <SwiperSlide key={product._id}>
-                <div
-                  onClick={() => navigate(`/product/${product._id}`)}
-                  className="card-hover h-full cursor-pointer group"
-                >
-                  <div className="relative h-64 overflow-hidden bg-dark-700">
-                    <img
-                      src={product.images?.[0] || 'https://via.placeholder.com/400x300?text=Antique'}
-                      alt={product.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
-                    />
+              {/* Content */}
+              <div className="container-app relative z-10 px-6 md:px-12 grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <div className="animate-fade-in-up">
+                  <div className="flex items-center gap-3 mb-6">
+                    <span className="px-3 py-1 bg-heritage-600/20 border border-heritage-600/50 text-heritage-600 rounded-full text-xs font-bold tracking-widest uppercase">
+                      Featured Collection
+                    </span>
                     {product.verificationStatus === 'verified' && (
-                      <div className="absolute top-4 right-4 bg-green-600 text-white px-3 py-1 rounded-full text-sm font-semibold flex items-center gap-1">
-                        ✓ Verified
-                      </div>
+                      <span className="text-green-500 text-xs font-bold flex items-center gap-1">
+                        <span className="w-2 h-2 bg-green-500 rounded-full"></span>
+                        AUTHENTICATED
+                      </span>
                     )}
                   </div>
 
-                  <div className="p-6">
-                    <h3 className="text-xl font-cinzel font-bold text-heritage-600 mb-2 line-clamp-2">
-                      {product.title}
-                    </h3>
+                  <h1 className="text-5xl md:text-7xl font-cinzel font-bold text-white mb-6 leading-tight">
+                    {product.title}
+                  </h1>
 
-                    <p className="text-sm text-slate-400 mb-4 line-clamp-3">
-                      {product.story || 'A remarkable piece from history...'}
-                    </p>
+                  <p className="text-lg text-slate-300 mb-8 max-w-xl leading-relaxed italic">
+                    "{product.story}"
+                  </p>
 
-                    <div className="space-y-3 mb-4">
-                      <div className="flex justify-between text-sm">
-                        <span className="text-slate-400">Estimated Age:</span>
-                        <span className="text-heritage-600 font-semibold">{product.estimatedAge}</span>
-                      </div>
-
-                      <div className="flex justify-between text-sm">
-                        <span className="text-slate-400">Heritage Score:</span>
-                        <div className="flex items-center gap-1">
-                          <div className="w-16 h-1 bg-dark-700 rounded-full overflow-hidden">
-                            <div
-                              className="h-full bg-heritage-600"
-                              style={{ width: `${(product.heritageScore / 10) * 100}%` }}
-                            ></div>
-                          </div>
-                          <span className="text-heritage-600 font-semibold w-6">
-                            {product.heritageScore}/10
-                          </span>
-                        </div>
-                      </div>
+                  <div className="grid grid-cols-3 gap-6 mb-10 border-l-2 border-heritage-600 pl-6">
+                    <div>
+                      <p className="text-[10px] uppercase tracking-widest text-slate-500 mb-1">Est. Age</p>
+                      <p className="text-xl font-bold text-heritage-600">{product.estimatedAge}</p>
                     </div>
-
-                    <div className="flex items-center justify-between pt-4 border-t border-dark-700">
-                      <span className="text-2xl font-bold text-heritage-600">
-                        ₹{product.price?.toLocaleString()}
-                      </span>
-                      <button className="btn-primary text-sm py-2 px-4">
-                        Explore →
-                      </button>
+                    <div>
+                      <p className="text-[10px] uppercase tracking-widest text-slate-500 mb-1">Heritage Score</p>
+                      <p className="text-xl font-bold text-heritage-600">{product.heritageScore}/10</p>
+                    </div>
+                    <div>
+                      <p className="text-[10px] uppercase tracking-widest text-slate-500 mb-1">Current Value</p>
+                      <p className="text-xl font-bold text-heritage-600">₹{product.price?.toLocaleString()}</p>
                     </div>
                   </div>
+
+                  <div className="flex items-center gap-6">
+                    <button
+                      onClick={() => navigate(`/product/${product._id}`)}
+                      className="btn-primary px-10 py-4 text-lg group"
+                    >
+                      Explore History
+                      <span className="inline-block transition-transform group-hover:translate-x-2 ml-2">→</span>
+                    </button>
+                    <button 
+                      onClick={() => navigate('/marketplace')}
+                      className="text-white hover:text-heritage-600 transition-colors font-semibold"
+                    >
+                      Browse Gallery
+                    </button>
+                  </div>
                 </div>
-              </SwiperSlide>
-            ))}
-          </Swiper>
-        )}
-      </div>
+
+                <div className="hidden lg:block">
+                  <div className="relative p-4 bg-dark-800/50 backdrop-blur-xl border border-dark-700 rounded-2xl transform rotate-3 hover:rotate-0 transition-transform duration-500 shadow-2xl">
+                    <img
+                      src={product.images?.[0]}
+                      alt={product.title}
+                      className="w-full h-[400px] object-cover rounded-xl shadow-2xl"
+                    />
+                    <div className="absolute -bottom-6 -right-6 w-32 h-32 bg-heritage-600/10 rounded-full blur-3xl"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </SwiperSlide>
+        ))}
+
+        {/* Custom Navigation */}
+        <div className="absolute bottom-12 right-12 z-20 flex gap-4">
+          <button className="swiper-button-prev-custom w-14 h-14 border border-dark-700 rounded-full flex items-center justify-center text-white hover:bg-heritage-600 hover:border-heritage-600 transition-all">
+            <span className="text-2xl">←</span>
+          </button>
+          <button className="swiper-button-next-custom w-14 h-14 border border-dark-700 rounded-full flex items-center justify-center text-white hover:bg-heritage-600 hover:border-heritage-600 transition-all">
+            <span className="text-2xl">→</span>
+          </button>
+        </div>
+      </Swiper>
 
       <style>{`
-        .heroCarousel :global(.swiper-button-next),
-        .heroCarousel :global(.swiper-button-prev) {
-          color: #c9a84c;
-          background: rgba(11, 11, 11, 0.8);
-          width: 50px;
-          height: 50px;
-          border-radius: 50%;
-          transition: all 0.3s;
+        .custom-bullet {
+          width: 12px !important;
+          height: 12px !important;
+          background: transparent !important;
+          border: 2px solid #3d2e0a !important;
+          opacity: 1 !important;
+          margin: 0 8px !important;
+          transition: all 0.3s !important;
         }
-
-        .heroCarousel :global(.swiper-button-next:hover),
-        .heroCarousel :global(.swiper-button-prev:hover) {
-          background: rgba(201, 168, 76, 0.2);
+        .custom-bullet.swiper-pagination-bullet-active {
+          background: #c9a84c !important;
+          border-color: #c9a84c !important;
+          transform: scale(1.2);
         }
-
-        .heroCarousel :global(.swiper-pagination-bullet) {
-          background: #c9a84c;
-          opacity: 0.5;
+        @keyframes fade-in-up {
+          from { opacity: 0; transform: translateY(20px); }
+          to { opacity: 1; transform: translateY(0); }
         }
-
-        .heroCarousel :global(.swiper-pagination-bullet-active) {
-          background: #c9a84c;
-          opacity: 1;
+        .animate-fade-in-up {
+          animation: fade-in-up 1s ease-out forwards;
         }
       `}</style>
     </div>

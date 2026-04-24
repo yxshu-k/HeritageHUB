@@ -82,12 +82,13 @@ export const wishlistAPI = {
 export const heritageAPI = {
   getHeritageInfo: async (searchTerm) => {
     try {
+      // Search for the category or term
       const response = await axios.get(
-        `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${searchTerm}&format=json&origin=*`
+        `https://en.wikipedia.org/w/api.php?action=query&list=search&srsearch=${encodeURIComponent(searchTerm + ' history artifact')}&format=json&origin=*`
       );
       return response.data.query.search || [];
     } catch (error) {
-      console.error('Heritage API Error:', error);
+      console.error('Heritage API Search Error:', error);
       return [];
     }
   },
@@ -95,14 +96,21 @@ export const heritageAPI = {
   getArticleContent: async (title) => {
     try {
       const response = await axios.get(
-        `https://en.wikipedia.org/w/api.php?action=query&titles=${title}&prop=extracts&explaintext=true&format=json&origin=*`
+        `https://en.wikipedia.org/w/api.php?action=query&titles=${encodeURIComponent(title)}&prop=extracts|pageimages&exintro=1&explaintext=1&piprop=original&format=json&origin=*`
       );
       const pages = response.data.query.pages;
-      const pageContent = Object.values(pages)[0]?.extract || '';
-      return pageContent.substring(0, 500) + '...';
+      const pageId = Object.keys(pages)[0];
+      const page = pages[pageId];
+      
+      if (!page || page.missing === '') return null;
+
+      return {
+        extract: page.extract ? page.extract.substring(0, 800) + '...' : '',
+        image: page.original?.source || null
+      };
     } catch (error) {
       console.error('Article Fetch Error:', error);
-      return '';
+      return null;
     }
   },
 
@@ -111,49 +119,49 @@ export const heritageAPI = {
     const heritageData = {
       'Ancient Coins': {
         title: 'Ancient Coinage Systems',
-        history: 'Ancient coins represent the pinnacle of early currency systems, originating around 600 BC. These artifacts showcase the economic, political, and artistic achievements of civilizations.',
-        origin: 'Mediterranean and Middle Eastern regions',
+        history: 'Ancient coins represent the pinnacle of early currency systems, originating around 600 BC in Lydia. These artifacts showcase the economic, political, and artistic achievements of civilizations like the Greeks, Romans, and Mauryans.',
+        origin: 'Lydia, Greece, Rome, India',
         significance: 'Key evidence of trade routes, economic systems, and political hierarchies',
       },
       'Vintage Watches': {
         title: 'History of Horology',
-        history: 'Mechanical watches represent centuries of innovation in timekeeping. From pocket watches to wristwatches, each era brought refinements in precision and design.',
-        origin: 'European craftsmen, particularly Swiss and German makers',
+        history: 'Mechanical watches represent centuries of innovation in timekeeping. From the first Nuremberg eggs to the precision of Swiss movements, each era brought refinements in precision and design.',
+        origin: 'Europe, particularly Switzerland, Germany, and England',
         significance: 'Symbols of precision engineering and luxury craftsmanship',
       },
       'Rare Books': {
         title: 'Antiquarian Bibliography',
-        history: 'Rare books are treasures of human knowledge, preserving first editions of seminal works. Collectible editions range from incunabula to limited modern printings.',
+        history: 'Rare books are treasures of human knowledge, preserving first editions of seminal works. Collectible editions range from early incunabula to limited modern printings with unique bindings.',
         origin: 'Publishing centers across Europe and Asia',
         significance: 'Windows into intellectual history and cultural development',
       },
       'Antique Jewelry': {
         title: 'Jewelry Through the Ages',
-        history: 'Antique jewelry combines artistic vision with precious materials, reflecting fashion, status, and cultural values across millennia.',
-        origin: 'Global artisan communities',
+        history: 'Antique jewelry combines artistic vision with precious materials, reflecting fashion, status, and cultural values across millennia, from Victorian mourning jewelry to Art Deco masterpieces.',
+        origin: 'Global artisan communities across Egypt, Europe, and Asia',
         significance: 'Personal adornment as cultural and economic indicator',
       },
       'Paintings': {
         title: 'Art History and Masterpieces',
-        history: 'Historical paintings are windows into artistic movements, capturing the aesthetic and cultural zeitgeist of their eras.',
-        origin: 'European art centers during the Renaissance and beyond',
+        history: 'Historical paintings are windows into artistic movements, capturing the aesthetic and cultural zeitgeist of their eras, from the Renaissance masters to Impressionist pioneers.',
+        origin: 'European and Asian art centers',
         significance: 'Cultural and monetary value in art markets',
       },
       'Sculptures': {
         title: 'Sculptural Traditions',
-        history: 'Sculptures represent the evolution of three-dimensional artistic expression across cultures and centuries.',
+        history: 'Sculptures represent the evolution of three-dimensional artistic expression across cultures and centuries, using materials like marble, bronze, and terracotta.',
         origin: 'Ancient civilizations to modern era',
         significance: 'Evidence of artistic technique and cultural values',
       },
       'Historical Cameras': {
         title: 'Evolution of Photography',
-        history: 'Vintage cameras chronicle the technical evolution of photography, from daguerreotypes to early 35mm systems.',
-        origin: 'Pioneer photographers and manufacturers',
+        history: 'Vintage cameras chronicle the technical evolution of photography, from the earliest daguerreotype boxes to the iconic Leica 35mm systems that revolutionized photojournalism.',
+        origin: 'Europe and USA',
         significance: 'Instrumental in democratizing visual documentation',
       },
       'Traditional Artifacts': {
         title: 'Cultural Artifacts & Anthropology',
-        history: 'Traditional artifacts preserve cultural practices, beliefs, and technologies of civilizations past and present.',
+        history: 'Traditional artifacts preserve cultural practices, beliefs, and technologies of civilizations past and present, serving as a bridge between generations.',
         origin: 'Diverse cultures worldwide',
         significance: 'Anthropological and cultural preservation',
       },

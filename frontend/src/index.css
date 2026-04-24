@@ -1,50 +1,72 @@
-@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800;900&family=Inter:wght@100;200;300;400;500;600;700;800;900&display=swap');
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@layer base {
+  :root {
+    --heritage-50: #fdfaf3;
+    --heritage-100: #f9f1de;
+    --heritage-200: #f1dfbb;
+    --heritage-300: #e8c78c;
+    --heritage-400: #dea95f;
+    --heritage-500: #d48b3b;
+    --heritage-600: #c9a84c; /* Gold Accent */
+    --heritage-700: #a37d2e;
+    --heritage-800: #826127;
+    --heritage-900: #6b5024;
+    --dark-50: #f6f6f6;
+    --dark-100: #e7e7e7;
+    --dark-200: #d1d1d1;
+    --dark-300: #b0b0b0;
+    --dark-400: #888888;
+    --dark-500: #6d6d6d;
+    --dark-600: #5d5d5d;
+    --dark-700: #3d2e0a; /* Dark Bronze */
+    --dark-800: #1a1008; /* Rich Dark Brown */
+    --dark-900: #0b0b0b; /* Pure Dark */
+  }
+
+  body {
+    @apply bg-dark-900 text-slate-200 font-inter antialiased;
+    background-image: 
+      radial-gradient(circle at 50% 0%, rgba(201, 168, 76, 0.05) 0%, transparent 50%),
+      radial-gradient(circle at 0% 100%, rgba(201, 168, 76, 0.03) 0%, transparent 50%);
+    background-attachment: fixed;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-cinzel tracking-tight;
+  }
 }
 
-html {
-  scroll-behavior: smooth;
-}
-
-body {
-  @apply bg-dark-900 text-slate-100 font-inter;
-}
-
-a {
-  @apply text-heritage-600 hover:text-heritage-500 transition-colors;
-}
-
-/* Heritage Premium Components */
 @layer components {
+  .container-app {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+
   .btn-primary {
-    @apply px-6 py-3 bg-heritage-600 hover:bg-heritage-700 text-white rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 active:scale-95;
+    @apply bg-heritage-600 text-dark-900 font-bold py-3 px-6 rounded-lg transition-all duration-300 hover:bg-heritage-500 hover:shadow-lg hover:shadow-heritage-600/30 active:scale-95 flex items-center justify-center gap-2;
+    font-family: 'Cinzel', serif;
   }
 
   .btn-secondary {
-    @apply px-6 py-3 border-2 border-heritage-600 text-heritage-600 hover:bg-heritage-600 hover:text-white rounded-lg font-semibold transition-all duration-200;
-  }
-
-  .btn-ghost {
-    @apply px-6 py-3 text-heritage-600 hover:text-heritage-700 transition-colors;
+    @apply bg-transparent border-2 border-heritage-600 text-heritage-600 font-bold py-3 px-6 rounded-lg transition-all duration-300 hover:bg-heritage-600/10 hover:shadow-lg active:scale-95 flex items-center justify-center gap-2;
+    font-family: 'Cinzel', serif;
   }
 
   .card {
-    @apply bg-gradient-card border border-heritage-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300;
+    @apply bg-dark-800 border border-dark-700 rounded-xl overflow-hidden transition-all duration-300;
+    box-shadow: 0 10px 30px -15px rgba(0, 0, 0, 0.5);
   }
 
   .card-hover {
-    @apply card hover:border-heritage-600 hover:scale-105 transform;
+    @apply card hover:border-heritage-600 hover:shadow-2xl hover:shadow-heritage-600/10 hover:-translate-y-1;
   }
 
   .input-field {
-    @apply w-full px-4 py-3 bg-dark-700 border-2 border-dark-600 rounded-lg text-slate-100 placeholder-slate-500 focus:outline-none focus:border-heritage-600 transition-colors;
+    @apply w-full bg-dark-950 border border-dark-700 text-white rounded-lg px-4 py-3 focus:outline-none focus:border-heritage-600 focus:ring-1 focus:ring-heritage-600 transition-all placeholder:text-slate-600;
   }
 
   .section-title {

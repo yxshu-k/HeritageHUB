@@ -11,9 +11,13 @@ cloudinary.config({
 
 const storage = new CloudinaryStorage({
   cloudinary,
-  params: {
-    folder: 'heritagehub',
-    allowed_formats: ['jpg', 'png', 'jpeg', 'webp']
+  params: async (req, file) => {
+    return {
+      folder: 'heritagehub',
+      allowed_formats: ['jpg', 'png', 'jpeg', 'webp'],
+      public_id: `product_${Date.now()}_${Math.floor(Math.random() * 1000)}`,
+      transformation: [{ width: 1000, height: 1000, crop: 'limit' }]
+    };
   },
 });
 

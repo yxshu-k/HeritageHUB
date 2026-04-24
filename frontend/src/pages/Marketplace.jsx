@@ -62,85 +62,108 @@ export default function Marketplace() {
   };
 
   return (
-    <div className="min-h-screen bg-dark-900 py-12 px-4">
+    <div className="min-h-screen bg-dark-900 py-20 px-4">
       <div className="container-app">
-        <div className="mb-12">
-          <h1 className="section-title">Marketplace</h1>
-          <p className="section-subtitle">Discover rare antiques and heritage collectibles</p>
+        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+          <div className="max-w-2xl">
+            <div className="inline-block px-3 py-1 bg-heritage-600/10 border border-heritage-600/30 rounded-full mb-4">
+              <span className="text-[10px] uppercase tracking-[0.3em] text-heritage-600 font-black">Curated Collection</span>
+            </div>
+            <h1 className="text-5xl font-black text-white mb-4 tracking-tighter">THE <span className="text-heritage-600">GALLERY</span></h1>
+            <p className="text-slate-400 font-light text-lg italic">Explore rare antiquities and priceless artifacts curated from across the globe.</p>
+          </div>
+          
+          <div className="flex items-center gap-4 bg-dark-800 p-2 rounded-xl border border-dark-700 shadow-xl">
+             <div className="flex items-center gap-2 px-4">
+                <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
+                <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Live Marketplace</span>
+             </div>
+          </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
           {/* Filters Sidebar */}
           <div className="lg:col-span-1">
-            <div className="card p-6 sticky top-20 max-h-96 overflow-y-auto">
-              <h3 className="text-lg font-semibold text-heritage-600 mb-6">Filters</h3>
+            <div className="card p-8 sticky top-32 border-t-2 border-heritage-600">
+              <h3 className="text-xs font-black text-heritage-600 mb-8 uppercase tracking-[0.4em]">Filter Archives</h3>
 
-              {/* Search */}
-              <div className="mb-6">
-                <label className="block text-sm font-semibold text-heritage-600 mb-2">
-                  Search
-                </label>
-                <input
-                  type="text"
-                  name="search"
-                  value={filters.search}
-                  onChange={handleFilterChange}
-                  className="input-field text-sm"
-                  placeholder="Search products..."
-                />
-              </div>
+              <div className="space-y-8">
+                {/* Search */}
+                <div className="space-y-3">
+                  <label className="text-[10px] uppercase tracking-widest text-slate-500 font-black ml-1">
+                    Search Artifact
+                  </label>
+                  <div className="relative">
+                    <input
+                      type="text"
+                      name="search"
+                      value={filters.search}
+                      onChange={handleFilterChange}
+                      className="input-field pl-10"
+                      placeholder="e.g. Mughal Gold..."
+                    />
+                    <span className="absolute left-4 top-1/2 -translate-y-1/2 text-slate-600">🔍</span>
+                  </div>
+                </div>
 
-              {/* Category Filter */}
-              <div className="mb-6">
-                <label className="block text-sm font-semibold text-heritage-600 mb-2">
-                  Category
-                </label>
-                <select
-                  name="category"
-                  value={filters.category}
-                  onChange={handleFilterChange}
-                  className="input-field text-sm"
-                >
-                  <option value="">All Categories</option>
-                  {categories.map((cat) => (
-                    <option key={cat} value={cat}>
-                      {cat}
-                    </option>
-                  ))}
-                </select>
-              </div>
+                {/* Category Filter */}
+                <div className="space-y-3">
+                  <label className="text-[10px] uppercase tracking-widest text-slate-500 font-black ml-1">
+                    Era / Category
+                  </label>
+                  <select
+                    name="category"
+                    value={filters.category}
+                    onChange={handleFilterChange}
+                    className="input-field appearance-none"
+                  >
+                    <option value="">All Periods</option>
+                    {categories.map((cat) => (
+                      <option key={cat} value={cat}>
+                        {cat}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-              {/* Sort By */}
-              <div className="mb-6">
-                <label className="block text-sm font-semibold text-heritage-600 mb-2">
-                  Sort By
-                </label>
-                <select
-                  name="sortBy"
-                  value={filters.sortBy}
-                  onChange={handleFilterChange}
-                  className="input-field text-sm"
-                >
-                  <option value="-createdAt">Newest</option>
-                  <option value="createdAt">Oldest</option>
-                  <option value="price">Price (Low to High)</option>
-                  <option value="-price">Price (High to Low)</option>
-                  <option value="-heritageScore">Heritage Score</option>
-                </select>
-              </div>
+                {/* Sort By */}
+                <div className="space-y-3">
+                  <label className="text-[10px] uppercase tracking-widest text-slate-500 font-black ml-1">
+                    Valuation Order
+                  </label>
+                  <select
+                    name="sortBy"
+                    value={filters.sortBy}
+                    onChange={handleFilterChange}
+                    className="input-field appearance-none"
+                  >
+                    <option value="-createdAt">Newest Discoveries</option>
+                    <option value="createdAt">Oldest First</option>
+                    <option value="price">Price: Low to High</option>
+                    <option value="-price">Price: High to Low</option>
+                    <option value="-heritageScore">Heritage Score</option>
+                  </select>
+                </div>
 
-              {/* Verified Only */}
-              <div className="flex items-center gap-2">
-                <input
-                  type="checkbox"
-                  name="verified"
-                  checked={filters.verified}
-                  onChange={handleFilterChange}
-                  className="w-4 h-4 cursor-pointer"
-                />
-                <label className="text-sm text-slate-300 cursor-pointer">
-                  Verified Only
-                </label>
+                {/* Verified Only */}
+                <div className="pt-4 border-t border-dark-700">
+                  <label className="flex items-center gap-3 cursor-pointer group">
+                    <div className="relative">
+                      <input
+                        type="checkbox"
+                        name="verified"
+                        checked={filters.verified}
+                        onChange={handleFilterChange}
+                        className="sr-only peer"
+                      />
+                      <div className="w-10 h-5 bg-dark-950 border border-dark-700 rounded-full peer-checked:bg-heritage-600 transition-colors"></div>
+                      <div className="absolute left-1 top-1 w-3 h-3 bg-slate-600 rounded-full peer-checked:translate-x-5 peer-checked:bg-dark-900 transition-all"></div>
+                    </div>
+                    <span className="text-xs font-bold text-slate-400 group-hover:text-white transition-colors uppercase tracking-widest">
+                      Authenticated Only
+                    </span>
+                  </label>
+                </div>
               </div>
             </div>
           </div>
@@ -148,23 +171,29 @@ export default function Marketplace() {
           {/* Products Grid */}
           <div className="lg:col-span-3">
             {loading ? (
-              <div className="flex items-center justify-center py-20">
-                <div className="text-center">
-                  <div className="w-12 h-12 border-4 border-heritage-600 border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
-                  <p className="text-heritage-600 font-semibold">Loading products...</p>
-                </div>
+              <div className="flex flex-col items-center justify-center py-40">
+                <div className="w-16 h-16 border-4 border-heritage-600 border-t-transparent rounded-full animate-spin mb-6"></div>
+                <p className="text-heritage-600 font-cinzel text-xl animate-pulse uppercase tracking-[0.3em]">Opening Vaults...</p>
               </div>
             ) : products.length === 0 ? (
-              <div className="card p-12 text-center">
-                <p className="text-xl text-slate-400 mb-4">No products found</p>
-                <p className="text-slate-500">Try adjusting your filters</p>
+              <div className="card p-20 text-center bg-dark-800/50 backdrop-blur-sm border-dashed border-dark-700">
+                <div className="text-6xl mb-6">🏺</div>
+                <h3 className="text-2xl font-cinzel font-bold text-white mb-2">No Artifacts Found</h3>
+                <p className="text-slate-500 font-light mb-8">The archives do not contain items matching your current filters.</p>
+                <button 
+                  onClick={() => setFilters({ search: '', category: '', sortBy: '-createdAt', verified: false })}
+                  className="btn-secondary py-2 px-8 text-xs"
+                >
+                  Reset Archives
+                </button>
               </div>
             ) : (
               <>
-                <div className="mb-6 text-sm text-slate-400">
-                  Showing {products.length} product{products.length !== 1 ? 's' : ''}
+                <div className="mb-8 flex justify-between items-center text-[10px] uppercase tracking-widest font-black text-slate-500">
+                  <span>Showing {products.length} cataloged artifacts</span>
+                  <span className="text-heritage-600">Page 1 of 1</span>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                   {products.map((product) => (
                     <ProductCard key={product._id} product={product} />
                   ))}
@@ -176,4 +205,4 @@ export default function Marketplace() {
       </div>
     </div>
   );
-}
+}
