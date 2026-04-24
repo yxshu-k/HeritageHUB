@@ -1,0 +1,98 @@
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  @apply bg-dark-900 text-slate-100 font-inter;
+}
+
+a {
+  @apply text-heritage-600 hover:text-heritage-500 transition-colors;
+}
+
+/* Heritage Premium Components */
+@layer components {
+  .btn-primary {
+    @apply px-6 py-3 bg-heritage-600 hover:bg-heritage-700 text-white rounded-lg font-semibold transition-all duration-200 transform hover:scale-105 active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply px-6 py-3 border-2 border-heritage-600 text-heritage-600 hover:bg-heritage-600 hover:text-white rounded-lg font-semibold transition-all duration-200;
+  }
+
+  .btn-ghost {
+    @apply px-6 py-3 text-heritage-600 hover:text-heritage-700 transition-colors;
+  }
+
+  .card {
+    @apply bg-gradient-card border border-heritage-800 rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300;
+  }
+
+  .card-hover {
+    @apply card hover:border-heritage-600 hover:scale-105 transform;
+  }
+
+  .input-field {
+    @apply w-full px-4 py-3 bg-dark-700 border-2 border-dark-600 rounded-lg text-slate-100 placeholder-slate-500 focus:outline-none focus:border-heritage-600 transition-colors;
+  }
+
+  .section-title {
+    @apply text-4xl md:text-5xl font-bold font-cinzel text-heritage-600 mb-4;
+  }
+
+  .section-subtitle {
+    @apply text-lg text-slate-300 mb-8;
+  }
+
+  .container-app {
+    @apply max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}
+
+/* Loading Animation */
+@keyframes pulse-gold {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.pulse-gold {
+  animation: pulse-gold 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Scrollbar Styling */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0b0b;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #c9a84c;
+  border-radius: 5px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #d4a574;
+}
+
+/* Smooth transitions */
+* {
+  @apply transition-all duration-200;
+}
