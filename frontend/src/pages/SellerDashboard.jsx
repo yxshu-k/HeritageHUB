@@ -53,18 +53,18 @@ export default function SellerDashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-dark-900 py-24 px-4 relative overflow-hidden">
+    <div className="min-h-screen bg-dark-900 py-10 md:py-24 px-4 relative overflow-hidden">
       {/* Background Accents */}
       <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-heritage-600/5 rounded-full blur-[120px] -mr-64 -mt-64"></div>
 
       <div className="container-app relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-end mb-12 gap-8">
-          <div>
+          <div className="max-w-3xl">
             <div className="inline-block px-3 py-1 bg-heritage-600/10 border border-heritage-600/30 rounded-full mb-4">
               <span className="text-[10px] uppercase tracking-[0.3em] text-heritage-600 font-black">Member Dashboard</span>
             </div>
-            <h1 className="text-5xl font-black text-white mb-4 tracking-tighter">THE <span className="text-heritage-600">CUSTODIAN</span> ROOM</h1>
-            <p className="text-slate-400 font-light text-lg italic">Welcome back, {user?.name}. Your collection awaits management.</p>
+            <h1 className="text-3xl md:text-5xl font-black text-white mb-4 tracking-tighter">THE <span className="text-heritage-600">CUSTODIAN</span> ROOM</h1>
+            <p className="text-slate-400 font-light text-base md:text-lg italic text-sm md:text-base">Welcome back, {user?.name}. Your collection awaits management.</p>
           </div>
           <button
             onClick={() => navigate('/add-product')}
@@ -82,7 +82,7 @@ export default function SellerDashboard() {
             { label: 'Verified Status', value: products.filter(p => p.verificationStatus === 'verified').length, icon: '🛡️' },
             { label: 'Estimated Portfolio', value: `₹${products.reduce((acc, p) => acc + (p.price || 0), 0).toLocaleString()}`, icon: '💰' },
           ].map((stat, i) => (
-            <div key={i} className="card p-8 border-t-2 border-heritage-600 bg-dark-800/40 backdrop-blur-xl">
+            <div key={i} className="card p-6 md:p-8 border-t-2 border-heritage-600 bg-dark-800/40 backdrop-blur-xl">
               <div className="flex items-center justify-between mb-4">
                 <span className="text-2xl">{stat.icon}</span>
                 <span className="text-[10px] uppercase tracking-widest text-slate-500 font-black">Archive Stat</span>
@@ -130,9 +130,9 @@ export default function SellerDashboard() {
               </div>
             ) : (
               products.map((product) => (
-                <div key={product._id} className="card p-8 bg-dark-800/50 backdrop-blur-xl group hover:border-heritage-600 transition-all duration-500">
+                <div key={product._id} className="card p-6 md:p-8 bg-dark-800/50 backdrop-blur-xl group hover:border-heritage-600 transition-all duration-500">
                   <div className="flex flex-col md:flex-row justify-between items-center gap-8">
-                    <div className="flex items-center gap-8 flex-1">
+                    <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8 flex-1 w-full">
                       <div className="w-24 h-24 rounded-xl overflow-hidden border border-dark-700 flex-shrink-0">
                         <img src={product.images?.[0]} className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" alt="" />
                       </div>

@@ -70,7 +70,7 @@
   }
 
   .section-title {
-    @apply text-4xl md:text-5xl font-bold font-cinzel text-heritage-600 mb-4;
+    @apply text-3xl md:text-5xl font-bold font-cinzel text-heritage-600 mb-4;
   }
 
   .section-subtitle {
@@ -132,6 +132,6 @@
 }
 
 /* Smooth transitions */
-* {
-  @apply transition-all duration-200;
+.transition-luxury {
+  @apply transition-all duration-300 ease-in-out;
 }

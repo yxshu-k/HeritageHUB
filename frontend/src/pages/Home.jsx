@@ -10,16 +10,16 @@ export default function Home() {
       <HeroCarousel />
 
       {/* Categories Preview */}
-      <section className="py-24 px-4 bg-dark-900 relative">
+      <section className="py-16 md:py-24 px-4 bg-dark-900 relative">
         <div className="container-app">
-          <div className="text-center mb-16">
+          <div className="text-center mb-12 md:mb-16">
             <div className="inline-block px-3 py-1 bg-heritage-600/10 border border-heritage-600/30 rounded-full mb-4">
               <span className="text-[10px] uppercase tracking-[0.3em] text-heritage-600 font-black">Curated Archives</span>
             </div>
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tighter">
+            <h2 className="text-3xl md:text-5xl font-black text-white mb-4 tracking-tighter">
               BROWSE BY <span className="text-heritage-600">CATEGORY</span>
             </h2>
-            <p className="text-slate-400 font-light max-w-xl mx-auto italic">Explore rare antiquities categorized by their historical era and cultural significance.</p>
+            <p className="text-slate-400 font-light max-w-xl mx-auto italic text-sm md:text-base">Explore rare antiquities categorized by their historical era and cultural significance.</p>
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
@@ -36,13 +36,13 @@ export default function Home() {
               <div
                 key={idx}
                 onClick={() => navigate(`/marketplace?category=${encodeURIComponent(category.name)}`)}
-                className="group relative h-64 overflow-hidden rounded-2xl cursor-pointer transition-all duration-500 hover:-translate-y-2"
+                className="group relative h-48 md:h-64 overflow-hidden rounded-2xl cursor-pointer transition-all duration-500 hover:-translate-y-2"
               >
                 <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-40 group-hover:opacity-60 transition-opacity`}></div>
                 <div className="absolute inset-0 bg-dark-950/40 backdrop-blur-[2px] group-hover:backdrop-blur-0 transition-all"></div>
                 
-                <div className="relative h-full p-8 flex flex-col items-center justify-center text-center">
-                  <div className="text-5xl mb-4 transform group-hover:scale-125 transition-transform duration-500">
+                <div className="relative h-full p-6 md:p-8 flex flex-col items-center justify-center text-center">
+                  <div className="text-4xl md:text-5xl mb-4 transform group-hover:scale-125 transition-transform duration-500">
                     {category.icon}
                   </div>
                   <h3 className="text-xl font-bold text-white mb-2 tracking-tight">
@@ -61,13 +61,13 @@ export default function Home() {
       </section>
 
       {/* Why Choose Us */}
-      <section className="py-24 px-4 border-y border-dark-800">
+      <section className="py-16 md:py-24 px-4 border-y border-dark-800">
         <div className="container-app">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-black text-white mb-4 tracking-tighter">
+          <div className="text-center mb-12 md:mb-16">
+            <h2 className="text-3xl md:text-5xl font-black text-white mb-4 tracking-tighter">
               WHY <span className="text-heritage-600">HERITAGEHUB?</span>
             </h2>
-            <p className="text-slate-400 font-light italic">The global gold standard for antiquity trade and preservation.</p>
+            <p className="text-slate-400 font-light italic text-sm md:text-base">The global gold standard for antiquity trade and preservation.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
@@ -109,15 +109,15 @@ export default function Home() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-32 px-4 relative overflow-hidden">
+      <section className="py-20 md:py-32 px-4 relative overflow-hidden">
         <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1459706484596-7140c49739c4?auto=format&fit=crop&q=80&w=2000')] bg-cover bg-center opacity-10 grayscale"></div>
         <div className="absolute inset-0 bg-gradient-to-t from-dark-900 via-dark-900/90 to-dark-900"></div>
         
         <div className="container-app relative z-10 text-center">
-          <h2 className="text-5xl md:text-7xl font-black text-white mb-8 tracking-tighter">
+          <h2 className="text-3xl md:text-5xl lg:text-7xl font-black text-white mb-6 md:mb-8 tracking-tighter">
             READY TO <span className="text-heritage-600">OWN HISTORY?</span>
           </h2>
-          <p className="text-xl text-slate-400 mb-12 max-w-2xl mx-auto font-light italic">
+          <p className="text-lg md:text-xl text-slate-400 mb-10 md:mb-12 max-w-2xl mx-auto font-light italic">
             Join our exclusive community of curators and begin your journey into the past today.
           </p>
           <div className="flex flex-col sm:flex-row gap-6 justify-center">

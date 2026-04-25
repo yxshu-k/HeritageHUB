@@ -15,6 +15,7 @@ export default function Marketplace() {
     verified: false,
   });
   const [categories, setCategories] = useState([]);
+  const [showFilters, setShowFilters] = useState(false);
 
   useEffect(() => {
     const fetchCategories = async () => {
@@ -64,28 +65,36 @@ export default function Marketplace() {
   return (
     <div className="min-h-screen bg-dark-900 py-20 px-4">
       <div className="container-app">
-        <div className="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-end mb-10 md:mb-16 gap-6 md:gap-8">
           <div className="max-w-2xl">
             <div className="inline-block px-3 py-1 bg-heritage-600/10 border border-heritage-600/30 rounded-full mb-4">
               <span className="text-[10px] uppercase tracking-[0.3em] text-heritage-600 font-black">Curated Collection</span>
             </div>
-            <h1 className="text-5xl font-black text-white mb-4 tracking-tighter">THE <span className="text-heritage-600">GALLERY</span></h1>
-            <p className="text-slate-400 font-light text-lg italic">Explore rare antiquities and priceless artifacts curated from across the globe.</p>
+            <h1 className="text-3xl md:text-5xl font-black text-white mb-4 tracking-tighter">THE <span className="text-heritage-600">GALLERY</span></h1>
+            <p className="text-slate-400 font-light text-base md:text-lg italic">Explore rare antiquities and priceless artifacts curated from across the globe.</p>
           </div>
           
-          <div className="flex items-center gap-4 bg-dark-800 p-2 rounded-xl border border-dark-700 shadow-xl">
-             <div className="flex items-center gap-2 px-4">
+          <div className="flex items-center justify-between w-full md:w-auto gap-4">
+            <div className="flex items-center gap-2 bg-dark-800 p-2 px-4 rounded-xl border border-dark-700 shadow-xl">
                 <span className="w-2 h-2 bg-green-500 rounded-full animate-pulse"></span>
                 <span className="text-[10px] font-black text-slate-500 uppercase tracking-widest">Live Marketplace</span>
-             </div>
+            </div>
+            
+            <button 
+              onClick={() => setShowFilters(!showFilters)}
+              className="lg:hidden flex items-center gap-2 bg-heritage-600 text-dark-900 px-4 py-2 rounded-xl font-bold text-xs"
+            >
+              <span>{showFilters ? '✕' : '🔍'}</span>
+              {showFilters ? 'CLOSE' : 'FILTER'}
+            </button>
           </div>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-12">
           {/* Filters Sidebar */}
-          <div className="lg:col-span-1">
-            <div className="card p-8 sticky top-32 border-t-2 border-heritage-600">
-              <h3 className="text-xs font-black text-heritage-600 mb-8 uppercase tracking-[0.4em]">Filter Archives</h3>
+          <div className={`lg:col-span-1 ${showFilters ? 'block' : 'hidden lg:block'}`}>
+            <div className="card p-6 md:p-8 sticky top-32 border-t-2 border-heritage-600">
+              <h3 className="text-xs font-black text-heritage-600 mb-6 md:mb-8 uppercase tracking-[0.4em]">Filter Archives</h3>
 
               <div className="space-y-8">
                 {/* Search */}

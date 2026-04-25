@@ -102,24 +102,24 @@ export default function AddProduct() {
   };
 
   return (
-    <div className="min-h-screen bg-dark-900 py-24 px-4 relative overflow-hidden">
+    <div className="min-h-screen bg-dark-900 py-10 md:py-24 px-4 relative overflow-hidden">
       {/* Background Accents */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-heritage-600/5 rounded-full blur-[150px] -mr-64 -mt-64"></div>
 
       <div className="container-app max-w-4xl relative z-10">
-        <div className="mb-12">
+        <div className="mb-10 md:mb-12">
           <div className="inline-block px-3 py-1 bg-heritage-600/10 border border-heritage-600/30 rounded-full mb-4">
             <span className="text-[10px] uppercase tracking-[0.3em] text-heritage-600 font-black">Seller Protocol</span>
           </div>
-          <h1 className="text-5xl font-black text-white mb-4 tracking-tighter">LIST AN <span className="text-heritage-600">ARTIFACT</span></h1>
-          <p className="text-slate-400 font-light text-lg italic">Every piece has a soul. Share its story with the world.</p>
+          <h1 className="text-3xl md:text-5xl font-black text-white mb-4 tracking-tighter">LIST AN <span className="text-heritage-600">ARTIFACT</span></h1>
+          <p className="text-slate-400 font-light text-base md:text-lg italic text-sm md:text-base">Every piece has a soul. Share its story with the world.</p>
         </div>
 
         <form onSubmit={handleSubmit} className="grid grid-cols-1 lg:grid-cols-3 gap-12">
           {/* Main Info */}
           <div className="lg:col-span-2 space-y-8">
-            <div className="card p-10 border-t-2 border-heritage-600 bg-dark-800/50 backdrop-blur-xl">
-              <h3 className="text-xs font-black text-heritage-600 mb-8 uppercase tracking-[0.4em]">Historical Cataloging</h3>
+            <div className="card p-6 md:p-10 border-t-2 border-heritage-600 bg-dark-800/50 backdrop-blur-xl">
+              <h3 className="text-xs font-black text-heritage-600 mb-6 md:mb-8 uppercase tracking-[0.4em]">Historical Cataloging</h3>
               
               <div className="space-y-6">
                 <div className="space-y-2">

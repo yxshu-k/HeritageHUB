@@ -7,7 +7,7 @@ export default function Footer() {
         <div className="grid grid-cols-1 md:grid-cols-4 gap-12 mb-12">
           {/* Brand */}
           <div>
-            <h3 className="text-3xl font-cinzel font-black text-white mb-6 tracking-tighter">
+            <h3 className="text-2xl md:text-3xl font-cinzel font-black text-white mb-6 tracking-tighter">
               HERITAGE<span className="text-heritage-600">HUB</span>
             </h3>
             <p className="text-slate-400 font-light italic mb-6">

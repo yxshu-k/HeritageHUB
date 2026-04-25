@@ -44,7 +44,7 @@ export default function Wishlist() {
   };
 
   return (
-    <div className="min-h-screen bg-dark-900 py-12 px-4">
+    <div className="min-h-screen bg-dark-900 py-6 md:py-12 px-4">
       <div className="container-app">
         <h1 className="section-title mb-4">My Wishlist</h1>
         <p className="section-subtitle mb-8">Your saved favorite items</p>

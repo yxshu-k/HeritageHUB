@@ -8,7 +8,7 @@ export default function ProductCard({ product }) {
       onClick={() => navigate(`/product/${product._id}`)}
       className="group relative bg-dark-800 border border-dark-700 rounded-xl overflow-hidden cursor-pointer transition-all duration-300 hover:border-heritage-600 hover:-translate-y-1 hover:shadow-2xl hover:shadow-heritage-600/10"
     >
-      <div className="relative h-64 overflow-hidden">
+      <div className="relative h-48 md:h-64 overflow-hidden">
         <img
           src={product.images?.[0] || 'https://images.unsplash.com/photo-1584622650111-993a426fbf0a?auto=format&fit=crop&q=80&w=800'}
           alt={product.title}
@@ -32,7 +32,7 @@ export default function ProductCard({ product }) {
         )}
       </div>
 
-      <div className="p-6">
+      <div className="p-4 md:p-6">
         <div className="flex justify-between items-start mb-2">
           <h3 className="font-cinzel text-lg font-bold text-heritage-600 line-clamp-1 group-hover:text-heritage-500 transition-colors">
             {product.title}

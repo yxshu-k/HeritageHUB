@@ -42,8 +42,8 @@ export default function Navbar() {
             to="/"
             className="flex items-center gap-2 group"
           >
-            <span className="text-3xl group-hover:rotate-12 transition-transform duration-300">🏺</span>
-            <span className="text-2xl font-cinzel font-black tracking-tighter text-white group-hover:text-heritage-600 transition-colors">
+            <span className="text-2xl md:text-3xl group-hover:rotate-12 transition-transform duration-300">🏺</span>
+            <span className="text-xl md:text-2xl font-cinzel font-black tracking-tighter text-white group-hover:text-heritage-600 transition-colors">
               HERITAGE<span className="text-heritage-600 group-hover:text-white transition-colors">HUB</span>
             </span>
           </Link>
@@ -113,8 +113,8 @@ export default function Navbar() {
         </div>
 
         {/* Mobile Menu */}
-        <div className={`md:hidden absolute top-full left-0 w-full bg-dark-900 border-b border-dark-700 transition-all duration-500 overflow-hidden ${
-          mobileMenuOpen ? 'max-h-screen py-8 px-6 opacity-100' : 'max-h-0 py-0 opacity-0'
+        <div className={`md:hidden absolute top-full left-0 w-full bg-dark-900/95 backdrop-blur-2xl border-b border-heritage-600/20 transition-all duration-500 overflow-hidden z-50 ${
+          mobileMenuOpen ? 'max-h-[90vh] py-8 px-6 opacity-100 shadow-2xl' : 'max-h-0 py-0 opacity-0'
         }`}>
           <div className="flex flex-col gap-6">
             {navLinks.map((link) => (

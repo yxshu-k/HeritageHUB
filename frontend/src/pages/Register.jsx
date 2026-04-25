@@ -63,9 +63,9 @@ export default function Register() {
       <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-heritage-600/5 rounded-full blur-[120px] -ml-64 -mb-64"></div>
 
       <div className="w-full max-w-xl relative z-10">
-        <div className="card p-12 border-t-4 border-heritage-600">
+        <div className="card p-8 md:p-12 border-t-4 border-heritage-600">
           <div className="text-center mb-10">
-            <h1 className="text-4xl font-cinzel font-black text-white mb-3 tracking-tighter">
+            <h1 className="text-2xl md:text-4xl font-cinzel font-black text-white mb-3 tracking-tighter">
               BECOME A <span className="text-heritage-600">CUSTODIAN</span>
             </h1>
             <p className="text-slate-400 font-light italic">

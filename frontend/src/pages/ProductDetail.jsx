@@ -162,7 +162,7 @@ export default function ProductDetail() {
   }
 
   return (
-    <div className="min-h-screen bg-dark-900 py-12 px-4">
+    <div className="min-h-screen bg-dark-900 py-6 md:py-12 px-4">
       <div className="container-app">
         <button
           onClick={() => navigate('/marketplace')}
@@ -178,7 +178,7 @@ export default function ProductDetail() {
               <img
                 src={product.images?.[0] || 'https://via.placeholder.com/800x600?text=Antique'}
                 alt={product.title}
-                className="w-full h-96 object-cover"
+                className="w-full h-64 md:h-96 object-cover"
               />
             </div>
 
@@ -187,7 +187,7 @@ export default function ProductDetail() {
               <div className="card p-8 mb-8 border-l-4 border-heritage-600 bg-gradient-to-br from-dark-800 to-dark-900 shadow-xl">
                 <div className="flex items-center gap-3 mb-6">
                   <span className="text-3xl">📜</span>
-                  <h3 className="text-2xl font-cinzel font-bold text-heritage-600">
+                  <h3 className="text-xl md:text-2xl font-cinzel font-bold text-heritage-600">
                     Heritage & Historical Context
                   </h3>
                 </div>
@@ -254,7 +254,7 @@ export default function ProductDetail() {
                     ✓ Verified
                   </span>
                 )}
-                <h1 className="text-3xl font-cinzel font-bold text-heritage-600">
+                <h1 className="text-2xl md:text-3xl font-cinzel font-bold text-heritage-600">
                   {product.title}
                 </h1>
               </div>
@@ -300,7 +300,7 @@ export default function ProductDetail() {
               {/* Price & Wishlist */}
               <div className="mb-6">
                 <p className="text-sm text-slate-500 mb-2">Starting Price</p>
-                <p className="text-4xl font-bold text-heritage-600 mb-6">
+                <p className="text-3xl md:text-4xl font-bold text-heritage-600 mb-6">
                   ₹{product.price?.toLocaleString()}
                 </p>
 

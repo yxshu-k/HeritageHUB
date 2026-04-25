@@ -114,8 +114,9 @@ export default function HeroCarousel() {
             return `<span class="${className} custom-bullet"></span>`;
           }
         }}
+        fadeEffect={{ crossFade: true }}
         autoplay={{ delay: 7000, disableOnInteraction: false }}
-        className="h-[85vh] w-full"
+        className="h-[80vh] md:h-[85vh] w-full"
       >
         {products.map((product) => (
           <SwiperSlide key={product._id}>
@@ -149,42 +150,42 @@ export default function HeroCarousel() {
                     )}
                   </div>
 
-                  <h1 className="text-5xl md:text-7xl font-cinzel font-bold text-white mb-6 leading-tight">
+                  <h1 className="text-3xl sm:text-5xl md:text-7xl font-cinzel font-bold text-white mb-4 md:mb-6 leading-tight">
                     {product.title}
                   </h1>
 
-                  <p className="text-lg text-slate-300 mb-8 max-w-xl leading-relaxed italic">
+                  <p className="text-base md:text-lg text-slate-300 mb-6 md:mb-8 max-w-xl leading-relaxed italic line-clamp-3 md:line-clamp-none">
                     "{product.story}"
                   </p>
 
-                  <div className="grid grid-cols-3 gap-6 mb-10 border-l-2 border-heritage-600 pl-6">
+                  <div className="grid grid-cols-3 gap-2 md:gap-6 mb-8 md:mb-10 border-l-2 border-heritage-600 pl-4 md:pl-6">
                     <div>
-                      <p className="text-[10px] uppercase tracking-widest text-slate-500 mb-1">Est. Age</p>
-                      <p className="text-xl font-bold text-heritage-600">{product.estimatedAge}</p>
+                      <p className="text-[8px] md:text-[10px] uppercase tracking-widest text-slate-500 mb-1">Est. Age</p>
+                      <p className="text-sm md:text-xl font-bold text-heritage-600">{product.estimatedAge}</p>
                     </div>
                     <div>
-                      <p className="text-[10px] uppercase tracking-widest text-slate-500 mb-1">Heritage Score</p>
-                      <p className="text-xl font-bold text-heritage-600">{product.heritageScore}/10</p>
+                      <p className="text-[8px] md:text-[10px] uppercase tracking-widest text-slate-500 mb-1">Score</p>
+                      <p className="text-sm md:text-xl font-bold text-heritage-600">{product.heritageScore}/10</p>
                     </div>
                     <div>
-                      <p className="text-[10px] uppercase tracking-widest text-slate-500 mb-1">Current Value</p>
-                      <p className="text-xl font-bold text-heritage-600">₹{product.price?.toLocaleString()}</p>
+                      <p className="text-[8px] md:text-[10px] uppercase tracking-widest text-slate-500 mb-1">Value</p>
+                      <p className="text-sm md:text-xl font-bold text-heritage-600">₹{product.price?.toLocaleString()}</p>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-6">
+                  <div className="flex flex-row items-center gap-4 md:gap-6">
                     <button
                       onClick={() => navigate(`/product/${product._id}`)}
-                      className="btn-primary px-10 py-4 text-lg group"
+                      className="btn-primary flex-1 sm:flex-none px-6 md:px-10 py-3 md:py-4 text-sm md:text-lg group"
                     >
-                      Explore History
+                      Details
                       <span className="inline-block transition-transform group-hover:translate-x-2 ml-2">→</span>
                     </button>
                     <button 
                       onClick={() => navigate('/marketplace')}
-                      className="text-white hover:text-heritage-600 transition-colors font-semibold"
+                      className="text-white hover:text-heritage-600 transition-colors font-semibold text-sm md:text-base"
                     >
-                      Browse Gallery
+                      Browse
                     </button>
                   </div>
                 </div>
@@ -209,12 +210,12 @@ export default function HeroCarousel() {
         ))}
 
         {/* Custom Navigation */}
-        <div className="absolute bottom-12 right-12 z-20 flex gap-4">
-          <button className="swiper-button-prev-custom w-14 h-14 border border-dark-700 rounded-full flex items-center justify-center text-white hover:bg-heritage-600 hover:border-heritage-600 transition-all">
-            <span className="text-2xl">←</span>
+        <div className="absolute bottom-4 right-4 md:bottom-12 md:right-12 z-20 flex gap-2 md:gap-4 scale-[0.6] origin-right md:scale-100">
+          <button className="swiper-button-prev-custom w-12 h-12 md:w-14 md:h-14 border border-dark-700 rounded-full flex items-center justify-center text-white hover:bg-heritage-600 hover:border-heritage-600 transition-all">
+            <span className="text-xl md:text-2xl">←</span>
           </button>
-          <button className="swiper-button-next-custom w-14 h-14 border border-dark-700 rounded-full flex items-center justify-center text-white hover:bg-heritage-600 hover:border-heritage-600 transition-all">
-            <span className="text-2xl">→</span>
+          <button className="swiper-button-next-custom w-12 h-12 md:w-14 md:h-14 border border-dark-700 rounded-full flex items-center justify-center text-white hover:bg-heritage-600 hover:border-heritage-600 transition-all">
+            <span className="text-xl md:text-2xl">→</span>
           </button>
         </div>
       </Swiper>

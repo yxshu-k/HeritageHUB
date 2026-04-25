@@ -52,17 +52,17 @@ export default function AdminDashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-dark-900 py-24 px-4 relative overflow-hidden">
+    <div className="min-h-screen bg-dark-900 py-10 md:py-24 px-4 relative overflow-hidden">
       {/* Background Accents */}
       <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-red-600/5 rounded-full blur-[150px] -mr-64 -mt-64"></div>
 
       <div className="container-app relative z-10">
-        <div className="mb-12">
+        <div className="mb-10 md:mb-12">
           <div className="inline-block px-3 py-1 bg-red-600/10 border border-red-600/30 rounded-full mb-4">
             <span className="text-[10px] uppercase tracking-[0.3em] text-red-500 font-black">Curator Protocol</span>
           </div>
-          <h1 className="text-5xl font-black text-white mb-4 tracking-tighter">AUTHENTICATION <span className="text-heritage-600">PANEL</span></h1>
-          <p className="text-slate-400 font-light text-lg italic">Verify and catalog rare artifacts before they enter the public marketplace.</p>
+          <h1 className="text-3xl md:text-5xl font-black text-white mb-4 tracking-tighter">AUTHENTICATION <span className="text-heritage-600">PANEL</span></h1>
+          <p className="text-slate-400 font-light text-base md:text-lg italic">Verify and catalog rare artifacts before they enter the public marketplace.</p>
         </div>
 
         {loading ? (
@@ -75,8 +75,8 @@ export default function AdminDashboard() {
             {products.map((product) => (
               <div key={product._id} className="card p-8 bg-dark-800/50 backdrop-blur-xl border-l-4 border-heritage-600">
                 <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-8">
-                  <div className="flex items-center gap-8">
-                     <div className="w-20 h-20 rounded-lg overflow-hidden border border-dark-700">
+                  <div className="flex flex-col sm:flex-row sm:items-center gap-4 sm:gap-8">
+                     <div className="w-20 h-20 shrink-0 rounded-lg overflow-hidden border border-dark-700">
                         <img src={product.images?.[0]} className="w-full h-full object-cover" alt="" />
                      </div>
                      <div>
