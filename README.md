@@ -15,9 +15,9 @@ HeritageHUB is a state-of-the-art, full-stack marketplace dedicated to the acqui
 ## ✨ Key Features
 
 ### 🏛️ Curated Marketplace
-- **Historical Context API**: Every artifact is linked to historical data, providing rich stories and cultural significance.
+- **Historical Context API**: Every artifact is linked to historical data from Wikipedia, providing rich stories and cultural significance (includes a graceful mock fallback system).
 - **Heritage Scoring**: A proprietary 1-10 scoring system based on age, rarity, and provenance.
-- **Smart Filters**: Advanced categorization (Ancient Coins, Vintage Watches, etc.) with a mobile-optimized collapsible sidebar.
+- **Smart Filters**: Advanced categorization (Ancient Coins, Vintage Watches, etc.) with a mobile-optimized collapsible sidebar and multi-layered sorting.
 
 ### 🛡️ Authentication & Security
 - **Dual-Role Access**: Dedicated flows for **Collectors (Buyers)** and **Custodians (Sellers)**.
@@ -27,6 +27,7 @@ HeritageHUB is a state-of-the-art, full-stack marketplace dedicated to the acqui
 ### 💰 Commerce & Interaction
 - **Dynamic Bidding**: Real-time bidding system for rare acquisitions.
 - **Wishlist Protocol**: Save and track your most desired historical pieces.
+- **Seller Dashboard**: Dedicated management portal for custodians to list inventory, track valuations, and monitor active bids.
 - **Cloudinary Integration**: High-resolution media uploads for visual evidence of artifact condition.
 
 ### 📱 Responsive Design
